@@ -33,4 +33,5 @@ export const config = {
      */
     "/((?!api|_next/static|_next/image|favicon.ico|sign-in|sign-up).*)",
   ],
+  runtime: "nodejs",
 };
