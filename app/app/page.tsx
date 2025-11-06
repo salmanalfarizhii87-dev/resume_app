@@ -65,12 +65,20 @@ export default function AppPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50 dark:from-gray-950 dark:via-purple-950/10 dark:to-blue-950/10 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }} />
+      </div>
+
+      <header className="border-b backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 border-white/20 relative z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">RingkasCepat</h1>
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 text-white shadow-lg">
+              <Sparkles className="h-6 w-6" />
+            </div>
+            <h1 className="text-2xl font-black bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">RingkasCepat</h1>
           </div>
           <div className="flex items-center gap-2">
             <HistorySheet />
@@ -79,22 +87,27 @@ export default function AppPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 max-w-5xl">
+      <main className="container mx-auto px-4 py-8 max-w-5xl relative z-10">
         <div className="grid gap-6 md:grid-cols-1">
-          <Card>
-            <CardHeader>
-              <CardTitle>Summarize Content</CardTitle>
-              <CardDescription>
+          <Card className="glass-effect border-2 shadow-2xl">
+            <CardHeader className="space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <CardTitle className="text-2xl font-bold">Summarize Content</CardTitle>
+              </div>
+              <CardDescription className="text-base">
                 Choose your content type and get an instant AI-powered summary
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as SourceType)}>
-                  <TabsList className="grid w-full grid-cols-3">
-                    <TabsTrigger value="url">URL</TabsTrigger>
-                    <TabsTrigger value="text">Text</TabsTrigger>
-                    <TabsTrigger value="youtube">YouTube</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-3 h-12 bg-gradient-to-r from-purple-100 via-pink-100 to-blue-100 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-blue-900/20">
+                    <TabsTrigger value="url" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-blue-500 data-[state=active]:text-white font-semibold">URL</TabsTrigger>
+                    <TabsTrigger value="text" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500 data-[state=active]:to-rose-500 data-[state=active]:text-white font-semibold">Text</TabsTrigger>
+                    <TabsTrigger value="youtube" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:text-white font-semibold">YouTube</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="url" className="space-y-4 mt-4">
@@ -159,9 +172,10 @@ export default function AppPage() {
                   </Select>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                  Ringkas
+                <Button type="submit" className="w-full h-14 gradient-primary text-white border-0 hover:opacity-90 transition-opacity shadow-lg text-lg font-bold glow-effect" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+                  <Sparkles className="mr-2 h-5 w-5" />
+                  Ringkas Sekarang
                 </Button>
               </form>
             </CardContent>
